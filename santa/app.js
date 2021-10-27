@@ -62,9 +62,9 @@ const loadGeofences = () => {
     .then((response) => response.json())
     .then((data) => {
       let minLat = Number.MAX_VALUE;
-      let maxLat = Number.MIN_VALUE;
+      let maxLat = -Number.MAX_VALUE;
       let minLon = Number.MAX_VALUE;
-      let maxLon = Number.MIN_VALUE;
+      let maxLon = -Number.MAX_VALUE;
       data.forEach((geofence) => {
         const wkt = geofence.area;
         if (wkt.lastIndexOf('LINESTRING', 0) === 0) {
