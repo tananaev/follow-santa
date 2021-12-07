@@ -52,9 +52,22 @@ const loginUser = () => {
   fetch(url + '/api/session?token=' + token)
     .then((response) => response.json())
     .then((data) => {
+      loadPoi(data);
       loadGeofences();
       loadDevices();
     });
+};
+
+const loadPoi = (user) => {
+  const poiLayer = user.poiLayer;
+  if (poiLayer) {
+    map.addLayer(new ol.layer.Vector({
+      source: new ol.source.Vector({
+        url: poiLayer,
+        format: new ol.format.KML(),
+      }),
+    }));
+  }
 };
 
 const loadGeofences = () => {
